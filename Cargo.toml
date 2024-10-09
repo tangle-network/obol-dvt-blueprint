@@ -1,0 +1,38 @@
+[package]
+name = "obol-dvt-blueprint"
+version = "0.1.0"
+edition = "2021"
+description = "TODO"
+authors = ["Webb Technologies Inc."]
+license = "MIT OR Apache-2.0"
+homepage = "https://tangle.tools"
+repository = "https://github.com/tangle-network/obol-dvt-blueprint"
+readme = "README.md"
+categories = ["cryptography", "cryptography::cryptocurrencies"]
+keywords = ["tangle", "blueprint", "avs"]
+rust-version = "1.81"
+
+[dependencies]
+tracing = "0.1"
+async-trait = "0.1"
+color-eyre = "0.6"
+structopt = "0.3.26"
+tokio = { version = "1.39", default-features = false, features = ["full"] }
+tracing-subscriber = { version = "0.3", features = ["parking_lot", "env-filter"] }
+bollard = "0.16.1"
+
+[dependencies.gadget-sdk]
+# TODO
+git = "https://github.com/tangle-network/gadget"
+default-features = false
+features = ["std", "getrandom"]
+
+[build-dependencies]
+blueprint-metadata = "0.1.2"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "obol-dvt-blueprint"
+path = "src/main.rs"
