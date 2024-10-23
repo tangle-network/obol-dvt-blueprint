@@ -4,7 +4,9 @@
 
 ## 📚 Overview
 
-This Tangle Blueprint provides a specification for running an Obol Distributed Validator Cluster as an Actively Validated Service (AVS) on the Tangle Network. It leverages Obol's distributed validator technology to enhance the security and reliability of Ethereum 2.0 staking operations.
+This Tangle Blueprint provides a specification for running an Obol Distributed Validator Cluster as an Actively
+Validated Service (AVS) on the Tangle Network. It leverages Obol's distributed validator technology to enhance the
+security and reliability of Ethereum 2.0 staking operations.
 
 ## 🚀 Features
 
@@ -14,11 +16,14 @@ This Tangle Blueprint provides a specification for running an Obol Distributed V
 
 ## 🛠️ How It Works
 
-1. **Cluster Configuration**: The blueprint defines the structure for configuring a Distributed Validator Cluster, including the number of operators, threshold for signing, and validator details.
+1. **Cluster Configuration**: The blueprint defines the structure for configuring a Distributed Validator Cluster,
+   including the number of operators, threshold for signing, and validator details.
 
-2. **Distributed Key Generation**: Implements Obol's DKG ceremony process, allowing multiple operators to jointly create validator keys without any single party having full control.
+2. **Distributed Key Generation**: Implements Obol's DKG ceremony process, allowing multiple operators to jointly create
+   validator keys without any single party having full control.
 
-3. **Node Operation**: Specifies how individual nodes in the cluster should be set up and operated, including charon client configuration and peer connectivity.
+3. **Node Operation**: Specifies how individual nodes in the cluster should be set up and operated, including charon
+   client configuration and peer connectivity.
 
 4. **Tangle Integration**: Allows on-demand instancing of Obol DVT clusters using Tangle's operator set.
 
@@ -37,10 +42,23 @@ To use this blueprint:
 - [Tangle Network](https://www.tangle.tools/)
 - [Ethereum 2.0 Staking](https://ethereum.org/en/staking/)
 
-## 📬 Feedback and Contributions
-
-We welcome feedback and contributions to improve this blueprint. Please open an issue or submit a pull request on our GitHub repository. Please let us know if you fork this blueprint and extend it too!
-
 ## 📜 License
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+Licensed under either of
+
+* Apache License, Version 2.0
+  ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
+* MIT license
+  ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+
+at your option.
+
+## 📬 Feedback and Contributions
+
+We welcome feedback and contributions to improve this blueprint.
+Please open an issue or submit a pull request on our GitHub repository.
+Please let us know if you fork this blueprint and extend it too!
+
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.
