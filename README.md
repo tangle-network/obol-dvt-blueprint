@@ -1,74 +1,46 @@
-# <h1 align="center"> A Tangle Blueprint 🌐 </h1>
+# <h1 align="center">Obol Distributed Validator Blueprint 🌐</h1>
 
-**A simple Hello World Blueprint for Tangle**
-
-## 📚 Prerequisites
-
-Before you can run this project, you will need to have the following software installed on your machine:
-
-- [Rust](https://www.rust-lang.org/tools/install)
-- [Forge](https://getfoundry.sh)
-- [Tangle](https://github.com/tangle-network/tangle?tab=readme-ov-file#-getting-started-)
-
-You will also need to install `cargo-tangle`, our CLI tool for creating and deploying Tangle Blueprints:
-
-To install the Tangle CLI, run the following command:
-
-> Supported on Linux, MacOS, and Windows (WSL2)
-
-```bash
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/webb-tools/gadget/releases/download/cargo-tangle/v0.1.1-beta.7/cargo-tangle-installer.sh | sh
-```
-
-Or, if you prefer to install the CLI from source:
-
-```bash
-cargo install cargo-tangle --git https://github.com/webb-tools/gadget --force
-```
-
-## 🚀 Getting Started
-
-Once `cargo-tangle` is installed, you can create a new project with the following command:
-
-```sh
-cargo tangle gadget create --name <project-name>
-```
-
-and follow the instructions to create a new project.
-
-## 🛠️ Development
-
-Once you have created a new project, you can run the following command to start the project:
-
-```sh
-cargo build
-```
-
-to build the project, and
-
-```sh
-cargo tangle gadget deploy
-```
-
-to deploy the blueprint to the Tangle network.
+**A Tangle Blueprint for running a Obol Distributed Validator Cluster**
 
 ## 📚 Overview
 
-This project is about creating a simple Hello World Blueprint for Tangle and EigenLayer. Blueprints are specifications
-for Actively Validated Services (AVS) on the Tangle Network. An AVS is an off-chain service that runs arbitrary
-computations for a user-specified period of time.
+This Tangle Blueprint provides a specification for running an Obol Distributed Validator Cluster as an Actively Validated Service (AVS) on the Tangle Network. It leverages Obol's distributed validator technology to enhance the security and reliability of Ethereum 2.0 staking operations.
 
-Blueprints provide a useful abstraction, allowing developers to create reusable service infrastructures as if they were
-smart contracts. This enables developers to monetize their work and align long-term incentives with the success of their
-creations, benefiting proportionally to their Blueprint's usage.
+## 🚀 Features
 
-For more details, please refer to the [project documentation](https://docs.tangle.tools/developers/blueprints).
+- Automated devops for running DVT clusters.
+- Integration with Obol's distributed key generation (DKG) process
+- Tangle Network integration for on-demand instancing of DVT clusters
 
-## 📬 Feedback
+## 🛠️ How It Works
 
-If you have any feedback or issues, please feel free to open an issue on
-our [GitHub repository](https://github.com/webb-tools/blueprint-template/issues).
+1. **Cluster Configuration**: The blueprint defines the structure for configuring a Distributed Validator Cluster, including the number of operators, threshold for signing, and validator details.
+
+2. **Distributed Key Generation**: Implements Obol's DKG ceremony process, allowing multiple operators to jointly create validator keys without any single party having full control.
+
+3. **Node Operation**: Specifies how individual nodes in the cluster should be set up and operated, including charon client configuration and peer connectivity.
+
+4. **Tangle Integration**: Allows on-demand instancing of Obol DVT clusters using Tangle's operator set.
+
+## 💻 Usage
+
+To use this blueprint:
+
+1. Review the blueprint specifications in the `src/` directory.
+2. Follow the Obol documentation to understand the Distributed Validator setup process.
+3. Adapt the blueprint to your specific cluster configuration needs.
+4. Deploy the blueprint on the Tangle Network using Tangle's deployment tools.
+
+## 🔗 External Links
+
+- [Obol Documentation](https://docs.obol.org/)
+- [Tangle Network](https://www.tangle.tools/)
+- [Ethereum 2.0 Staking](https://ethereum.org/en/staking/)
+
+## 📬 Feedback and Contributions
+
+We welcome feedback and contributions to improve this blueprint. Please open an issue or submit a pull request on our GitHub repository. Please let us know if you fork this blueprint and extend it too!
 
 ## 📜 License
 
-This project is licensed under the unlicense License. See the [LICENSE](./LICENSE) file for more details.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
