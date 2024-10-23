@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: UNLICENSE
 pragma solidity >=0.8.13;
 
-import "core/BlueprintServiceManager.sol";
+import "tnt-core/BlueprintServiceManager.sol";
 
 /**
- * @title HelloBlueprint
+ * @title ObolDvtBlueprint
  * @dev This contract is an example of a service blueprint that provides a single service.
  */
-contract HelloBlueprint is BlueprintServiceManager {
+contract ObolDvtBlueprint is BlueprintServiceManager {
     /**
      * @dev Hook for service operator registration. Called when a service operator
      * attempts to register with the blueprint.
@@ -15,10 +15,10 @@ contract HelloBlueprint is BlueprintServiceManager {
      * @param _registrationInputs Inputs required for registration.
      */
     function onRegister(bytes calldata operator, bytes calldata _registrationInputs)
-        public
-        payable
-        override
-        onlyFromRootChain
+    public
+    payable
+    override
+    onlyFromRootChain
     {
         // Do something with the operator's details
     }
@@ -31,10 +31,10 @@ contract HelloBlueprint is BlueprintServiceManager {
      * @param _requestInputs Inputs required for the service request.
      */
     function onRequest(uint64 serviceId, bytes[] calldata operators, bytes calldata _requestInputs)
-        public
-        payable
-        override
-        onlyFromRootChain
+    public
+    payable
+    override
+    onlyFromRootChain
     {
         // Do something with the service request
     }

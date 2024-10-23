@@ -1,4 +1,4 @@
-FROM {{base-image}} AS chef
+FROM rustlang/rust:nightly AS chef
 
 RUN cargo install cargo-chef
 WORKDIR /app
@@ -14,13 +14,13 @@ RUN cargo build --release
 
 FROM debian:bookworm-slim AS runtime
 WORKDIR /app
-COPY --from=chef /app/target/release/{{project-name}} /usr/local/bin
+COPY --from=chef /app/target/release/obol-dvt-blueprint /usr/local/bin
 COPY --from=chef /app/docker/entrypoint.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-LABEL org.opencontainers.image.authors="{{authors}}"
-LABEL org.opencontainers.image.description="{{project-description}}"
-LABEL org.opencontainers.image.source="https://github.com/{{gh-username}}/{{project-name}}"
+LABEL org.opencontainers.image.authors="Webb Technologies Inc."
+LABEL org.opencontainers.image.description="A blueprint to create an Obol distributed validator cluster"
+LABEL org.opencontainers.image.source="https://github.com/tangle-network/obol-dvt-blueprint"
 
 ENV RUST_LOG="gadget=info"
 ENV BIND_ADDR="0.0.0.0"
