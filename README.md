@@ -1,40 +1,64 @@
 # <h1 align="center">Obol Distributed Validator Blueprint 🌐</h1>
 
-**A Tangle Blueprint for running a Obol Distributed Validator Cluster**
+<h3 align="center">A Tangle Blueprint for running a Obol Distributed Validator Cluster</h3>
 
 ## 📚 Overview
 
-This Tangle Blueprint provides a specification for running an Obol Distributed Validator Cluster as an Actively
-Validated Service (AVS) on the Tangle Network. It leverages Obol's distributed validator technology to enhance the
-security and reliability of Ethereum 2.0 staking operations.
+This Tangle Blueprint provides a specification for running a [group](https://docs.obol.org/docs/start/quickstart_group)
+Obol Distributed Validator Cluster as an <abbr title="Actively Validated Service">AVS</abbr> on the Tangle Network.
 
 ## 🚀 Features
 
-- Automated devops for running DVT clusters.
-- Integration with Obol's distributed key generation (DKG) process
-- Tangle Network integration for on-demand instancing of DVT clusters
+- Automated devops for running <abbr title="Distributed Validator Technology">DVT</abbr> clusters.
+- Automatically performs Obol's <abbr title="Distributed Key Generation">DKG</abbr> process
+- Tangle Network integration for on-demand instancing of <abbr title="Distributed Validator Technology">DVT</abbr>
+  clusters
 
 ## 🛠️ How It Works
 
 1. **Cluster Configuration**: The blueprint defines the structure for configuring a Distributed Validator Cluster,
    including the number of operators, threshold for signing, and validator details.
+2. **Leader Selection**: For simplicity, the leader is simply the first operator.
+3. **Distributed Key Generation**: Automatically performs Obol's <abbr title="Distributed Key Generation">DKG</abbr>
+   ceremony process
+    * Each operator [creates](https://docs.obol.org/docs/charon/charon-cli-reference#creating-an-enr-for-charon)
+      an <abbr title="Ethereum Node Record">ENR</abbr>, and then shares them with the leader.
+    * The leader uses these <abbr title="Ethereum Node Record">ENR</abbr>s
+      to [create the DKG config](https://docs.obol.org/docs/charon/charon-cli-reference#creating-the-configuration-for-a-dkg-ceremony)
+    * The leader distributes the <abbr title="Distributed Key Generation">DKG</abbr> config back to the other operators
+    * The [DKG ceremony](https://docs.obol.org/docs/charon/charon-cli-reference#performing-a-dkg-ceremony) starts,
+      generating the cluster definition files.
+4. **Tangle Integration**: Allows on-demand instancing of Obol <abbr title="Distributed Validator Technology">DVT</abbr>
+   clusters using Tangle's operator set.
 
-2. **Distributed Key Generation**: Implements Obol's DKG ceremony process, allowing multiple operators to jointly create
-   validator keys without any single party having full control.
+## 📋 Pre-requisites
 
-3. **Node Operation**: Specifies how individual nodes in the cluster should be set up and operated, including charon
-   client configuration and peer connectivity.
-
-4. **Tangle Integration**: Allows on-demand instancing of Obol DVT clusters using Tangle's operator set.
+* [Docker](https://docs.docker.com/engine/install/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
+* [cargo-tangle](https://crates.io/crates/cargo-tangle)
 
 ## 💻 Usage
 
 To use this blueprint:
 
 1. Review the blueprint specifications in the `src/` directory.
-2. Follow the Obol documentation to understand the Distributed Validator setup process.
+2. Follow the [Obol documentation](https://docs.obol.org/docs/start/quickstart_group) to understand the Distributed
+   Validator setup process.
 3. Adapt the blueprint to your specific cluster configuration needs.
-4. Deploy the blueprint on the Tangle Network using Tangle's deployment tools.
+    * For simplicity, this blueprint by default will simply copy
+      the [sample Holesky config](https://github.com/ObolNetwork/charon-distributed-validator-node/blob/main/.env.sample.holesky).
+      This can be
+      changed [here](https://github.com/tangle-network/obol-dvt-blueprint/blob/7e9f169cd84683c78e8122e3341e59aa41c2b91c/src/operator.rs#L43).
+4. Deploy the blueprint on the Tangle Network using the Tangle CLI:
+
+```shell
+$ cargo tangle blueprint deploy
+```
+
+5. Activate the DV
+    * See the [Obol documentation](https://docs.obol.org/docs/start/activate-dv) for this section. Once the operators
+      have finished the <abbr title="Distributed Key Generation">DKG</abbr> ceremony, the `deposit-data.json` file will
+      be generated, and can be taken from any of the operators.
 
 ## 🔗 External Links
 
