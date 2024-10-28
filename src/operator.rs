@@ -1,9 +1,10 @@
-use crate::docker::{docker_compose, Container};
 use crate::DkgConfig;
-use bollard::container::{LogOutput, LogsOptions};
 use bollard::Docker;
 use color_eyre::{Report, Result};
-use gadget_sdk::ext::subxt::ext::futures::StreamExt;
+use gadget_sdk as sdk;
+use gadget_sdk::docker::bollard::container::{LogOutput, LogsOptions};
+use sdk::docker::{bollard, Container};
+use sdk::ext::subxt::ext::futures::StreamExt;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::sync::Arc;
@@ -117,7 +118,7 @@ impl Operator {
             .binds(vec![format!("{}:{CHARON_DATA}", self.data_dir.display())]);
 
         container.start(true).await?;
-        container.remove().await?;
+        container.remove(None).await?;
 
         tracing::info!("Successfully created DKG config");
 
@@ -166,7 +167,7 @@ impl Operator {
             .binds(vec![format!("{}:{CHARON_DATA}", self.data_dir.display())]);
 
         container.start(true).await?;
-        container.remove().await?;
+        container.remove(None).await?;
 
         if !cluster_lock_path.exists() {
             todo!("How to handle failure?");
@@ -204,7 +205,7 @@ async fn create_enr(docker: &Docker, data_dir: &Path) -> Result<String> {
             follow: true,
             ..Default::default()
         }))
-        .await?
+        .await
     else {
         tracing::error!("Failed to create ENR, no output available");
         return Err(Report::msg("Failed to create ENR").into());
@@ -232,7 +233,25 @@ async fn create_enr(docker: &Docker, data_dir: &Path) -> Result<String> {
 
     std::fs::write(data_dir.join("enr.pub"), enr.as_bytes())?;
 
-    container.remove().await?;
+    container.remove(None).await?;
 
     Ok(enr)
+}
+
+/// Run `docker compose up -d` and return the container ID
+pub(crate) async fn docker_compose(dir: &Path) -> Result<String> {
+    let _ = Command::new("docker-compose")
+        .arg("up")
+        .arg("-d")
+        .current_dir(dir)
+        .output()?;
+
+    let out = Command::new("docker-compose")
+        .arg("ps")
+        .arg("-q")
+        .arg("charon")
+        .current_dir(dir)
+        .output()?;
+
+    Ok(String::from_utf8_lossy(&out.stdout).to_string())
 }

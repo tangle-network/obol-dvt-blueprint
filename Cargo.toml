@@ -16,18 +16,12 @@ rust-version = "1.81"
 tracing = "0.1"
 async-trait = "0.1"
 color-eyre = "0.6"
-structopt = "0.3.26"
 tokio = { version = "1.41", default-features = false, features = ["full"] }
-tracing-subscriber = { version = "0.3", features = ["parking_lot", "env-filter"] }
-bollard = "0.16.1"
-tempfile = "3.13.0" # TODO: Remove, only for testing
 serde = { version = "1", features = ["derive"] }
 
 [dependencies.gadget-sdk]
-# TODO
-git = "https://github.com/tangle-network/gadget"
-default-features = false
-features = ["std", "getrandom"]
+version = "0.2.3"
+features = ["getrandom"]
 
 [dependencies.libp2p]
 version = "0.54.1"
@@ -52,8 +46,7 @@ features = [
 ]
 
 [build-dependencies]
-# TODO
-blueprint-metadata = { git = "https://github.com/tangle-network/gadget" }
+blueprint-metadata = "0.1.6"
 
 [lib]
 path = "src/lib.rs"
@@ -63,4 +56,4 @@ name = "obol-dvt-blueprint"
 path = "src/main.rs"
 
 [package.metadata.blueprint]
-manager = { evm = "ObolDvtBlueprint" }
+manager = { Evm = "ObolDvtBlueprint" }

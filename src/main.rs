@@ -1,9 +1,10 @@
 use color_eyre::Result;
 use gadget_sdk as sdk;
-use gadget_sdk::ctx::{ServicesContext, TangleClientContext};
-use gadget_sdk::ext::subxt::tx::Signer;
-use gadget_sdk::job_runner::MultiJobRunner;
 use obol_dvt_blueprint as blueprint;
+use sdk::ctx::{ServicesContext, TangleClientContext};
+use sdk::docker;
+use sdk::ext::subxt::tx::Signer;
+use sdk::job_runner::MultiJobRunner;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
@@ -27,7 +28,7 @@ async fn main() -> Result<()> {
         }
     }
 
-    let docker = blueprint::connect_to_docker().await?;
+    let docker = docker::connect_to_docker(None).await?;
     let dv_operator = blueprint::Operator::new(docker, data_dir.clone()).await?;
     let network = blueprint::start_p2p_network(&env).await?;
 
@@ -69,10 +70,8 @@ async fn main() -> Result<()> {
         client: client.clone(),
     };
 
-    MultiJobRunner::new(&ctx.env)
-        .with_job()
-        .with_default_price_targets()
-        .finish(update_job)
+    MultiJobRunner::new(ctx.env.clone())
+        .job(update_job)
         .run()
         .await?;
 

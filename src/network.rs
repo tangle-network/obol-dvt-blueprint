@@ -33,17 +33,17 @@ use super::{DkgConfig, ObolContext};
 use color_eyre::eyre::eyre;
 use color_eyre::{Report, Result};
 use gadget_sdk as sdk;
-use gadget_sdk::ext::sp_core::Pair;
-use gadget_sdk::futures::StreamExt;
-use gadget_sdk::keystore::BackendExt;
-use gadget_sdk::libp2p;
-use gadget_sdk::network::channels::UserID;
-use gadget_sdk::network::gossip::GossipHandle;
-use gadget_sdk::network::{IdentifierInfo, Network};
 use libp2p::swarm::{NetworkBehaviour, SwarmEvent};
 use libp2p::{identify, noise, ping, relay, tcp, yamux};
 use sdk::config::StdGadgetConfiguration;
+use sdk::ext::sp_core::Pair;
+use sdk::futures::StreamExt;
+use sdk::keystore::BackendExt;
+use sdk::libp2p;
+use sdk::network::channels::UserID;
+use sdk::network::gossip::GossipHandle;
 use sdk::network::setup::NetworkConfig;
+use sdk::network::{IdentifierInfo, Network};
 use serde::{Deserialize, Serialize};
 
 // TODO: For testing, want to ensure all peers are running
