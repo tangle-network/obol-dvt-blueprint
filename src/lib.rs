@@ -1,16 +1,17 @@
-mod docker;
 mod network;
 mod operator;
 
-pub use docker::*;
 pub use network::*;
 pub use operator::*;
 
 use gadget_sdk as sdk;
 use sdk::config::StdGadgetConfiguration;
 use sdk::ctx::{ServicesContext, TangleClientContext};
+use sdk::event_listener::tangle::jobs::{services_post_processor, services_pre_processor};
+use sdk::event_listener::tangle::TangleEventListener;
 use sdk::job;
 use sdk::network::gossip::GossipHandle;
+use sdk::tangle_subxt::tangle_testnet_runtime::api::services::events::JobCalled;
 use std::convert::Infallible;
 use std::sync::Arc;
 
@@ -36,8 +37,9 @@ pub struct DkgConfig {
     params(a),
     result(_),
     event_listener(
-        listener = TangleEventListener,
-        event = JobCalled,
+        listener = TangleEventListener<JobCalled, Arc<ObolContext>>,
+        pre_processor = services_pre_processor,
+        post_processor = services_post_processor,
     )
 )]
 pub fn update(ctx: Arc<ObolContext>, a: u32) -> Result<u32, Infallible> {

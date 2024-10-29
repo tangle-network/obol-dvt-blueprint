@@ -1664,8 +1664,9 @@ dependencies = [
 
 [[package]]
 name = "blueprint-metadata"
-version = "0.1.2"
-source = "git+https://github.com/tangle-network/gadget#2274dd09c3d09c2b45e0a5565794c06879cb5166"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4f8754ff7a709cf0643f82093fff582192a36afe3b075cde8e752ad9e39d35ed"
 dependencies = [
  "cargo_metadata",
  "fs2",
@@ -4079,10 +4080,10 @@ dependencies = [
 
 [[package]]
 name = "gadget-blueprint-proc-macro"
-version = "0.1.2"
-source = "git+https://github.com/tangle-network/gadget#2274dd09c3d09c2b45e0a5565794c06879cb5166"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e7647c0856f98241327768377e0ddc15355131188f12c7d3deb812cea495dd20"
 dependencies = [
- "alloy-contract",
  "gadget-blueprint-proc-macro-core",
  "indexmap 2.6.0",
  "itertools 0.13.0",
@@ -4094,8 +4095,9 @@ dependencies = [
 
 [[package]]
 name = "gadget-blueprint-proc-macro-core"
-version = "0.1.2"
-source = "git+https://github.com/tangle-network/gadget#2274dd09c3d09c2b45e0a5565794c06879cb5166"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "788b9e5ef537eea236c14f1a450ee92f7039b241d048f97470e8e8fb5be0319a"
 dependencies = [
  "cid",
  "ethereum-types",
@@ -4104,8 +4106,9 @@ dependencies = [
 
 [[package]]
 name = "gadget-context-derive"
-version = "0.1.1"
-source = "git+https://github.com/tangle-network/gadget#2274dd09c3d09c2b45e0a5565794c06879cb5166"
+version = "0.1.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23bef0d4140c6b60e5a94ebe2bb6aaa2d2015f2edcf2b784440822a4e5c801dc"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4114,8 +4117,9 @@ dependencies = [
 
 [[package]]
 name = "gadget-io"
-version = "0.0.2"
-source = "git+https://github.com/tangle-network/gadget#2274dd09c3d09c2b45e0a5565794c06879cb5166"
+version = "0.0.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a9e52f42ca7f356087755f38dd992d8a11e5d88ed8354263ff76961ab39f732"
 dependencies = [
  "cfg-if",
  "hex",
@@ -4136,8 +4140,9 @@ dependencies = [
 
 [[package]]
 name = "gadget-sdk"
-version = "0.1.2"
-source = "git+https://github.com/tangle-network/gadget#2274dd09c3d09c2b45e0a5565794c06879cb5166"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8311df35804604c78e42a93eff1951acbb52bdf81994e2e0258e1c479f636d46"
 dependencies = [
  "alloy-contract",
  "alloy-network",
@@ -4148,6 +4153,7 @@ dependencies = [
  "alloy-signer-local",
  "alloy-sol-types",
  "alloy-transport",
+ "alloy-transport-http",
  "ark-bn254",
  "ark-ec",
  "ark-ff 0.4.2",
@@ -4156,12 +4162,14 @@ dependencies = [
  "auto_impl",
  "backon",
  "bincode",
+ "bollard",
  "ed25519-zebra 4.0.3",
  "eigensdk",
  "elliptic-curve",
  "failure",
  "futures",
  "gadget-blueprint-proc-macro",
+ "gadget-blueprint-proc-macro-core",
  "gadget-context-derive",
  "gadget-io",
  "getrandom",
@@ -4194,9 +4202,11 @@ dependencies = [
  "thiserror",
  "tokio",
  "tokio-retry",
+ "tokio-stream",
  "tracing",
  "tracing-subscriber 0.3.18",
  "url",
+ "uuid 1.11.0",
  "w3f-bls",
 ]
 
@@ -6885,16 +6895,12 @@ version = "0.1.0"
 dependencies = [
  "async-trait",
  "blueprint-metadata",
- "bollard",
  "color-eyre",
  "gadget-sdk",
  "libp2p",
  "serde",
- "structopt",
- "tempfile",
  "tokio",
  "tracing",
- "tracing-subscriber 0.3.18",
 ]
 
 [[package]]
@@ -10925,7 +10931,6 @@ dependencies = [
  "matchers 0.1.0",
  "nu-ansi-term",
  "once_cell",
- "parking_lot",
  "regex",
  "serde",
  "serde_json",
