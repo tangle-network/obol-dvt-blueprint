@@ -74,7 +74,7 @@ async fn spin(env: &StdGadgetConfiguration, identity: libp2p::identity::Keypair)
         })?
         .build();
 
-    swarm.listen_on(format!("/ip4/{}/tcp/{}", env.bind_addr, env.bind_port).parse()?)?;
+    swarm.listen_on(format!("/ip4/{}/tcp/{}", env.target_addr, env.target_port).parse()?)?;
 
     // Connect to bootnodes
     for addr in &env.bootnodes {
@@ -125,8 +125,7 @@ pub async fn start_p2p_network(env: &StdGadgetConfiguration) -> Result<GossipHan
         identity,
         ecdsa.signer().clone(),
         env.bootnodes.clone(),
-        env.bind_addr,
-        env.bind_port,
+        env.target_port,
         "/obol-dvt-config",
     );
 
