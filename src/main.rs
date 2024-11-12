@@ -4,7 +4,8 @@ use obol_dvt_blueprint as blueprint;
 use sdk::ctx::{ServicesContext, TangleClientContext};
 use sdk::docker;
 use sdk::ext::subxt::tx::Signer;
-use sdk::job_runner::MultiJobRunner;
+use sdk::runners::tangle::TangleConfig;
+use sdk::runners::BlueprintRunner;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
 
@@ -62,15 +63,15 @@ async fn main() -> Result<()> {
     tracing::info!("Starting the event watcher ...");
 
     let ctx = Arc::new(ctx);
-    let service_id = ctx.env.service_id.expect("should exist");
     let update_job = blueprint::UpdateEventHandler {
         ctx: Arc::clone(&ctx),
-        service_id,
+        service_id: ctx.env.service_id().unwrap(),
         signer: signer.clone(),
         client: client.clone(),
     };
 
-    MultiJobRunner::new(ctx.env.clone())
+    let tangle_config = TangleConfig::default();
+    BlueprintRunner::new(tangle_config, ctx.env.clone())
         .job(update_job)
         .run()
         .await?;

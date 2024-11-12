@@ -37,7 +37,7 @@ pub struct DkgConfig {
     params(a),
     result(_),
     event_listener(
-        listener = TangleEventListener<JobCalled, Arc<ObolContext>>,
+        listener = TangleEventListener<Arc<ObolContext>, JobCalled>,
         pre_processor = services_pre_processor,
         post_processor = services_post_processor,
     )
